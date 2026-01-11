@@ -179,10 +179,10 @@ class AnsiToWin32:
             self.wrapped.write(text)
             self.wrapped.flush()
         if self.autoreset:
-            self.reset_all()
+            self.reset_console()
 
 
-    def reset_all(self):
+    def reset_console(self):
         if self.convert:
             self.call_win32('m', (0,))
         elif not self.strip and not self.stream.closed:
