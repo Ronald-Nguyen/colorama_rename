@@ -136,7 +136,7 @@ def backup_project(project_dir: Path, backup_dir: Path) -> None:
         shutil.rmtree(backup_dir)
     shutil.copytree(
         project_dir, backup_dir, 
-        ignore=shutil.ignore_patterns('__pycache__', '*.pyc', '.git')
+        ignore=shutil.ignore_patterns('__pycache__', '*.pyc', '.git', 'test')
     )
 
 def restore_project(backup_dir: Path, project_dir: Path) -> None:
@@ -202,7 +202,7 @@ def save_results(iteration: int, result_dir: Path, files: dict, test_result: dic
 
 def main():
     # HIER DEINEN PROMPT DEFINIEREN ODER LADEN
-    YOUR_PROMPT = "Führe das Refactoring durch..." 
+    YOUR_PROMPT = RENAME_PROMPT_TEMPLATE
 
     print(f"{'='*60}\nStarte Refactoring-Experiment\n{'='*60}\n")
 
