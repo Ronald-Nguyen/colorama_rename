@@ -118,7 +118,7 @@ class AnsiToWin32:
         # are we wrapping stderr?
         self.on_stderr = self.wrapped is sys.stderr
 
-    def should_wrap(self):
+    def is_wrappable(self):
         '''
         True if this class is actually needed. If false, then the output
         stream will not be affected, nor will win32 calls be issued, so
@@ -179,10 +179,10 @@ class AnsiToWin32:
             self.wrapped.write(text)
             self.wrapped.flush()
         if self.autoreset:
-            self.reset_console()
+            self.reset_all()
 
 
-    def reset_console(self):
+    def reset_all(self):
         if self.convert:
             self.call_win32('m', (0,))
         elif not self.strip and not self.stream.closed:

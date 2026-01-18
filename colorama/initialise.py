@@ -27,7 +27,7 @@ def _wipe_internal_state_for_tests():
 
 def reset_all():
     if AnsiToWin32 is not None:    # Issue #74: objects might become None at exit
-        AnsiToWin32(orig_stdout).reset_console()
+        AnsiToWin32(orig_stdout).reset_all()
 
 
 def init(autoreset=False, convert=None, strip=None, wrap=True):
@@ -108,7 +108,7 @@ def wrap_stream(stream, convert, strip, autoreset, wrap):
     if wrap:
         wrapper = AnsiToWin32(stream,
             convert=convert, strip=strip, autoreset=autoreset)
-        if wrapper.should_wrap():
+        if wrapper.is_wrappable():
             stream = wrapper.stream
     return stream
 
